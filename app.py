@@ -17,9 +17,10 @@ def get_conn():
     return pg8000.connect(
         host=DB_HOST,
         port=int(DB_PORT),
-        database=DB_NAME,  # pg8000 usa 'database', NO 'dbname'
+        database=DB_NAME,
         user=DB_USER,
-        password=DB_PASSWORD
+        password=DB_PASSWORD,
+        ssl_context=True
     )
 
 @app.route("/", methods=["GET", "POST"])
