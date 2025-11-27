@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Productos Detectados</title>
+</head>
+<body>
+<h1>Productos Detectados</h1>
+<table border="1">
+    <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Actualizar</th>
+    </tr>
+    {% for nombre, precio in productos %}
+    <tr>
+        <form method="POST">
+            <td>{{ nombre }}</td>
+            <td>
+                <input type="number" name="precio" value="{{ precio }}">
+                <input type="hidden" name="producto" value="{{ nombre }}">
+            </td>
+            <td><button type="submit">Actualizar</button></td>
+        </form>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
