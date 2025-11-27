@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, redirect
-import psycopg2
+from flask import Flask, render_template, request
+import pg8000
 import os
 from dotenv import load_dotenv
 
@@ -14,10 +14,10 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 app = Flask(__name__)
 
 def get_conn():
-    return psycopg2.connect(
+    return pg8000.connect(
         host=DB_HOST,
-        port=int(DB_PORT),     # 🔥 importante
-        dbname=DB_NAME,
+        port=int(DB_PORT),
+        database=DB_NAME,  # pg8000 usa 'database', NO 'dbname'
         user=DB_USER,
         password=DB_PASSWORD
     )
@@ -50,5 +50,5 @@ def index():
     return render_template("index.html", productos=productos)
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 5000))  # 🔥 importante para Render
+    port = int(os.getenv("PORT", 5000))  # requerido por Render
     app.run(host="0.0.0.0", port=port)
